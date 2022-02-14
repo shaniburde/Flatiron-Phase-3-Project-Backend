@@ -6,4 +6,13 @@ class ApplicationController < Sinatra::Base
     { message: "Good luck with your project!" }.to_json
   end
 
+  get '/artists' do
+    Artist.all.to_json
+  end
+
+  get '/artists/:id' do
+    artist = Artist.find(params[:id])
+    artist.to_json
+  end
+
 end
