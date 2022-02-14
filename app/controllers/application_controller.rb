@@ -3,16 +3,15 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    { message: "Good luck with your project!" }.to_json
+    event = Event.all
+    event.to_json(include: :venue)
+    
   end
 
-  get '/artists' do
-    Artist.all.to_json
+  get '/user' do
+    user = User.first
+    user.to_json(include: :event)
   end
 
-  get '/artists/:id' do
-    artist = Artist.find(params[:id])
-    artist.to_json
-  end
 
 end
