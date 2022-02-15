@@ -13,5 +13,9 @@ class ApplicationController < Sinatra::Base
     user.to_json(include: :event)
   end
 
+  get '/venues' do 
+    venues = Venue.all
+    venues.to_json( only: [:venue_name, :id] )
+  end
 
 end
