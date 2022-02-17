@@ -56,4 +56,9 @@ class ApplicationController < Sinatra::Base
     event.to_json(include: :venue)
   end
 
+  get '/most-popular' do
+   user = User.popular
+   user.to_json
+  end
+
 end
