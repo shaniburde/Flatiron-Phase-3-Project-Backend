@@ -5,7 +5,6 @@ class ApplicationController < Sinatra::Base
   get "/" do
     event = Event.all
     event.to_json(include: :venue)
-    
   end
 
   get '/user' do
@@ -51,10 +50,10 @@ class ApplicationController < Sinatra::Base
         event_type: params[:event_type],
         attendees: params[:attendees],
         price: params[:price],
-        date: params[:date]
+        date: params[:date],
+
     )
-    event.to_json
-    redirect to '/'
+    event.to_json(include: :venue)
   end
 
 end
