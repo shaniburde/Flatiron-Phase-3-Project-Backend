@@ -4,7 +4,8 @@ class ApplicationController < Sinatra::Base
   # Add your routes here
   get "/" do
     event = Event.all
-    event.to_json(include: :venue)
+    event.to_json(include: { venue: { only: [:venue_name, :capacity, :phone, :address] }, 
+      user: { only: [:username] }})
   end
 
   get '/user' do
@@ -53,12 +54,23 @@ class ApplicationController < Sinatra::Base
         date: params[:date],
 
     )
-    event.to_json(include: :venue)
+    event.to_json(include: { venue: { only: [:venue_name, :capacity, :phone, :address] }, 
+      user: { only: [:username] }})
   end
 
   get '/most-popular' do
-   user = User.popular
+   user = User.most_popular
    user.to_json
+  end
+
+  get '/most-skrilla' do
+    user = User.popping
+    user.to_json
+  end
+
+  get '/busy-bee' do
+    user = User.busy_beaver
+    user.to_json
   end
 
 end
